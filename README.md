@@ -1,21 +1,20 @@
-Kacper Szczepański 418474
+# Compiler construction - Latte compiler (October 2022 - January 2023)
 
-Kompilator Latte
+Compiler for programming language Latte - translates provided code to quadruple code, then to Asembler x86 32-bit using language Haskell.
 
-Polecenie "make" stworzy program latc i latc_x86. Uruchamianie:
-./latc - program wczytany ze standardowego wejścia
-./latc ścieżka_do_pliku - program wczytany z pliku
+Command "make" creates program "latc_x86" and symlink to it "latc". Program is compiled Asembler x86 code.
 
-Frontend:
-Głównymi narzędziamy użytymi są monady Reader, State oraz Except.
-Reader - środowisko typów
-State - informacja o zwracanym typie funkcji, która jest teraz typecheckowana
-Except - wyjątki
++ `./latc` - reads program from standard input
++ `./latc path_to_file` - reads program from file
 
-Dodatkowo program sprawdza cały graf ścieżek, czy każda ma odpowiedniego returna.
+Implemented features:
++ basic types: integer, boolean, string, void
++ basic arythmetic, boolean and string operations
++ while loops, conditions
++ functions
++ classes and objects with inheriting, attributes and virtual methods
 
-Program tłumaczy wczytany kod na język asembler x_86 32-bit. Wykorzystuje on takie same monadyczne biblioteki oraz:
-IO
-standardowe biblioteki list, map, bits i char
-
-Kod jest ponaddto zopytmalizowany metodą LCSE.
+First bnfc translates program to Haskell data structure.
+Next typechecker catches all syntax errors.
+Later program is translated to quadruple code and optimised.
+At the end quadruple code is translated to Asembler x86 code and compiled.
